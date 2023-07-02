@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _count = 0;
+  int _count = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -23,40 +23,63 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        floatingActionButton: FloatingActionButton(
-          onPressed: increment, // reference only
-          backgroundColor: Colors.amber,
-          child: const Icon(
-            Icons.add,
-          ),
+        floatingActionButton: Wrap(
+          direction: Axis.horizontal,
+          spacing: 16,
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: byTwo, // reference only
+              backgroundColor: Colors.amber,
+              child: const Text('/2'),
+            ),
+            FloatingActionButton(
+              onPressed: timesTwo, // reference only
+              backgroundColor: Colors.amber,
+              child: const Text('*2'),
+            ),
+            FloatingActionButton(
+              onPressed: substractTwo, // reference only
+              backgroundColor: Colors.amber,
+              child: const Text('-2'),
+            ),
+            FloatingActionButton(
+              onPressed: addTwo, // reference only
+              backgroundColor: Colors.amber,
+              child: const Text('+2'),
+            ),
+          ],
         ),
         // children
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.green,
           title: const Text(
-            'Navbar',
+            'Tarea - Contador',
             style: TextStyle(
-              fontSize: 35,
+              fontSize: 36,
             ),
           ),
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Contador de clicks',
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
+              Container(
+                margin: const EdgeInsets.only(left: 16, right: 16),
+                child: const Text(
+                  'Pulse los botones para modificar el siguiente número:',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
               Text(
                 '$_count',
                 style: const TextStyle(
-                  fontSize: 32,
-                  color: Colors.black,
+                  fontSize: 44,
+                  color: Colors.red,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -67,9 +90,27 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void increment() {
+  void addTwo() {
     setState(() {
-      _count++;
+      _count += 2;
+    });
+  }
+
+  void substractTwo() {
+    setState(() {
+      _count -= 2;
+    });
+  }
+
+  void timesTwo() {
+    setState(() {
+      _count *= 2;
+    });
+  }
+
+  void byTwo() {
+    setState(() {
+      _count ~/= 2;
     });
   }
 }
